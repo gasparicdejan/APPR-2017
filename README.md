@@ -18,7 +18,7 @@ Podatke bom pridobil na spletni strani:
 
 ## Cilj
 
-Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kaj, koliko ter kako se izvoz in uvoz spreminjata skozi čas v zadnjih petih letih.
+Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kaj, koliko ter kako se izvoz in uvoz spreminjata skozi čas v zadnjih petih letih. V analizi podatkov nameravam tudi napovedati gibanje izvoza in uvoza ZDA za leto 2017.
 
 ## Program
 
