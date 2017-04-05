@@ -8,7 +8,7 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18.
 
 ## Tematika
 
-Vsebina, ki jo bom obravnaval pri tem projektu obsega trgovanje ZDA. V obsegu te analize, bom obravnaval izvoz ter uvoz ZDA z drugimi državami sveta v zadnjih petih letih. Za vsako državo s katero ZDA trguje, bom prikazal uvoz ter izvoz nekaj glavnih kategorij produktov ter uvoz in izvoz vseh produktov, ki jih uvaža oziroma izvaža ZDA v te države.  Podatki bodo v velikosti tisoč ameriških dolarjih (USD) na enoto.
+Vsebina, ki jo bom obravnaval pri tem projektu obsega trgovanje ZDA. V obsegu te analize, bom obravnaval izvoz ter uvoz ZDA z drugimi državami sveta v zadnjih petih letih. Za vsako državo s katero ZDA trguje, bom prikazal uvoz ter izvoz nekaj glavnih kategorij produktov ter uvoz in izvoz vseh produktov, ki jih uvaža oziroma izvaža ZDA v te države. Podatki bodo v velikosti tisoč ameriških dolarjih (USD) na enoto.
 
 Podatke bom pridobil na spletni strani:
 - https://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States;
