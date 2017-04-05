@@ -1,11 +1,24 @@
-# Analiza podatkov s programom R, 2016/17
+# Analiza izvoza in uvoza Slovenije
 
-Repozitorij z gradivi pri predmetu APPR v študijskem letu 2016/17
+Avtor: Dejan Gašparič
+
+Mentor: Janoš Vidali
+
+Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18.
 
 ## Tematika
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal. Tukaj boste
-napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+Vsebina, ki jo bom obravnaval pri tem projektu obsega trgovanje ZDA. V obsegu te analize, bom obravnaval izvoz ter uvoz ZDA z drugimi državami sveta v zadnjih petih letih. Za vsako državo s katero ZDA trguje, bom prikazal uvoz ter izvoz nekaj glavnih kategorij produktov ter uvoz in izvoz vseh produktov, ki jih uvaža oziroma izvaža ZDA v te države.  Podatki bodo v velikosti tisoč ameriških dolarjih (USD) na enoto.
+
+Podatke bom pridobil na spletni strani:
+- https://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States;
+- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2010/EndYear/2014/TradeFlow/Import/Indicator/MPRT-TRD-VL/Partner/by-country/Product/Total;
+- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2010/EndYear/2014/TradeFlow/Export/Indicator/XPRT-TRD-VL/Partner/by-country/Product/Total;
+- ostale povezave sledijo iz klasifikacije po produktih izmed zadnjih dveh povezav.
+
+## Cilj
+
+Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kaj, koliko ter kako se izvoz in uvoz spreminjata skozi čas v zadnjih petih letih.
 
 ## Program
 
