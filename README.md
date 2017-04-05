@@ -1,4 +1,4 @@
-# Analiza izvoza in uvoza Slovenije
+# Analiza izvoza in uvoza ZDA
 
 Avtor: Dejan Gašparič
 
