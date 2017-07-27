@@ -15,7 +15,7 @@ Podatke bom pridobil na spletnih straneh:
 - http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2011/EndYear/2015/TradeFlow/Import/Indicator/MPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
 - http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2010/TradeFlow/Import/Indicator/MPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
 - http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2011/EndYear/2015/TradeFlow/Export/Indicator/XPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
--http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2010/TradeFlow/Export/Indicator/XPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
+- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2010/TradeFlow/Export/Indicator/XPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
 - ostale povezave sledijo iz klasifikacije po produktih izmed zadnjih dveh povezav.
 
 Podatki so v obliki HTML in CSV. 
