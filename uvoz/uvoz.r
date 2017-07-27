@@ -13,82 +13,38 @@ library(reshape2)
 
 
 
-# PODATKI V OBLIKI csv :
-# Uvoz države ZDA iz drugih držav sveta:
+############################### PODATKI V OBLIKI CSV: ###############################
 
-tabela_uvoz_vseh_produktov <- read.csv2("podatki/import_all_product.csv", skip=1, na.strings = ";", 
-                                        stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                        col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                                      "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_uvoz_vseh_produktov <- melt(tabela_uvoz_vseh_produktov[,c(2,6:15)], variable.name = "Leto",
-                                   value.name = "Vsi produkti", na.rm = FALSE)
-tabela_uvoz_vseh_produktov$Leto <- tabela_uvoz_vseh_produktov$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_uvoz_vseh_produktov$Leto <- tabela_uvoz_vseh_produktov$Leto %>% as.numeric()
+## Uvoz ZDA iz drugih držav sveta:
 
+# Funkcija "uvozi.tabelo" na podlagi naslova (mesta, kjer imamo uvozeno tabelo in njejega naslova)
+# in kategorije izdelkov in storitev vrne tabelo, ki ima 3 stolpce (Partnerska država, Leto, 
+# Kategorija) in vsebuje za 10 letno obdobje (2006-2015) podatke o uvozu ZDA po posameznih 
+# kategorijah in državah.
 
+uvozi.tabelo <- function(naslov, products){
+  tabela <- read.csv2(naslov, skip=1, na.strings = ";", 
+                      stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
+                      col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
+                                    "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
+  tabela <- melt(tabela[,c(2,6:15)], variable.name = "Leto",
+                                     value.name = products, na.rm = FALSE)
+  tabela$Leto <- tabela$Leto %>% as.character() %>%
+    strapplyc("([0-9]+)")
+  tabela$Leto <- tabela$Leto %>% as.numeric()
+  return(tabela)
+}
 
-tabela_uvoz_zivali <- read.csv2("podatki/import_animal.csv", skip=1, na.strings = ";", 
-                                stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                              "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_uvoz_zivali <- melt(tabela_uvoz_zivali[,c(2,6:15)], variable.name = "Leto",
-                           value.name = "Živali", na.rm = FALSE)
-tabela_uvoz_zivali$Leto <- tabela_uvoz_zivali$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_uvoz_zivali$Leto <- tabela_uvoz_zivali$Leto %>% as.numeric()
-
-
-
-tabela_uvoz_zelenjave <- read.csv2("podatki/import_vegetable.csv", skip=1, na.strings = ";", 
-                                   stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                   col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                                 "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_uvoz_zelenjave <- melt(tabela_uvoz_zelenjave[,c(2,6:15)], variable.name = "Leto",
-                              value.name = "Zelenjava", na.rm = FALSE)
-tabela_uvoz_zelenjave$Leto <- tabela_uvoz_zelenjave$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_uvoz_zelenjave$Leto <- tabela_uvoz_zelenjave$Leto %>% as.numeric()
+tabela_uvoz_vseh_produktov <- uvozi.tabelo("podatki/import_all_product.csv", "Vsi_produkti")
+tabela_uvoz_zivali <- uvozi.tabelo("podatki/import_animal.csv", "Zivali")
+tabela_uvoz_zelenjave <- uvozi.tabelo("podatki/import_vegetable.csv", "Zelenjava")
+tabela_uvoz_goriva <- uvozi.tabelo("podatki/import_fuels.csv", "Gorivo")
+tabela_uvoz_plastike_in_gume <- uvozi.tabelo("podatki/import_plastic_or_rubber.csv", "Plastika_in_guma")
+tabela_uvoz_lesa <- uvozi.tabelo("podatki/import_wood.csv", "Les")
 
 
 
-tabela_uvoz_goriva <- read.csv2("podatki/import_fuels.csv", skip=1, na.strings = ";", 
-                                stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                              "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_uvoz_goriva <- melt(tabela_uvoz_goriva[,c(2,6:15)], variable.name = "Leto",
-                           value.name = "Gorivo", na.rm = FALSE)
-tabela_uvoz_goriva$Leto <- tabela_uvoz_goriva$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_uvoz_goriva$Leto <- tabela_uvoz_goriva$Leto %>% as.numeric()
-
-
-
-tabela_uvoz_plastike_in_gume <- read.csv2("podatki/import_plastic_or_rubber.csv", skip=1, na.strings = ";", 
-                                          stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                          col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                                        "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_uvoz_plastike_in_gume <- melt(tabela_uvoz_plastike_in_gume[,c(2,6:15)], variable.name = "Leto",
-                                     value.name = "Platika in guma", na.rm = FALSE)
-tabela_uvoz_plastike_in_gume$Leto <- tabela_uvoz_plastike_in_gume$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_uvoz_plastike_in_gume$Leto <- tabela_uvoz_plastike_in_gume$Leto %>% as.numeric()
-
-
-
-tabela_uvoz_lesa <- read.csv2("podatki/import_wood.csv", skip=1, na.strings = ";", 
-                              stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                              col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                            "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_uvoz_lesa <- melt(tabela_uvoz_lesa[,c(2,6:15)], variable.name = "Leto",
-                         value.name = "Les", na.rm = FALSE)
-tabela_uvoz_lesa$Leto <- tabela_uvoz_lesa$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_uvoz_lesa$Leto <- tabela_uvoz_lesa$Leto %>% as.numeric()
-
-
-
-#SESTAVA SKUPNE TABELE 'tabela_uvoz':
+# SESTAVA SKUPNE TABELE "tabela_uvoz":
 
 tabela_uvoz <- merge(tabela_uvoz_vseh_produktov, tabela_uvoz_zivali, 
                      by = c("Partner", "Leto"), all.x = TRUE)
@@ -102,153 +58,63 @@ tabela_uvoz <- merge(tabela_uvoz, tabela_uvoz_lesa,
                      by = c("Partner", "Leto"), all.x = TRUE)
 
 
-# Urejanje in čiščenje podatkov v tabeli 'tabela_uvoz':
-for (i in 1:length(tabela_uvoz$Zelenjava)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_uvoz$Zelenjava[i]))&(i%%10 == 0)){
-      tabela_uvoz$Zelenjava[(i-9): i] <- c(rep(NA,10))
+# Urejanje in čiščenje podatkov v tabeli "tabela_uvoz":
+
+ciscenje <- function(kategorija){
+  for (i in 1:length(kategorija)) {
+    for (k in 1:9) {
+      if ((is.na(kategorija[i]))&(i%%10 == 0)){
+        kategorija[(i-9): i] <- c(rep(NA,10))
       }
-    else if ((is.na(tabela_uvoz$Zelenjava[i]))&(i%%10 == k)){
-      tabela_uvoz$Zelenjava[(i-k+1): (i+10-k)] <- c(rep(NA,10))
+      else if ((is.na(kategorija[i]))&(i%%10 == k)){
+        kategorija[(i-k+1): (i+10-k)] <- c(rep(NA,10))
       }
-  }
-}
-
-for (i in 1:length(tabela_uvoz$`Vsi produkti`)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_uvoz$`Vsi produkti`[i]))&(i%%10 == 0)){
-      tabela_uvoz$`Vsi produkti`[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_uvoz$`Vsi produkti`[i]))&(i%%10 == k)){
-      tabela_uvoz$`Vsi produkti`[(i-k+1): (i+10-k)] <- c(rep(NA,10))
     }
   }
+  return(kategorija)
 }
 
-for (i in 1:length(tabela_uvoz$Živali)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_uvoz$Živali[i]))&(i%%10 == 0)){
-      tabela_uvoz$Živali[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_uvoz$Živali[i]))&(i%%10 == k)){
-      tabela_uvoz$Živali[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
+tabela_uvoz$Zelenjava <- ciscenje(tabela_uvoz$Zelenjava)
+tabela_uvoz$Vsi_produkti <- ciscenje(tabela_uvoz$Vsi_produkti)
+tabela_uvoz$Zivali <- ciscenje(tabela_uvoz$Zivali)
+tabela_uvoz$Gorivo <-ciscenje(tabela_uvoz$Gorivo)
+tabela_uvoz$Plastika_in_guma<- ciscenje(tabela_uvoz$Plastika_in_guma)
+tabela_uvoz$Les <- ciscenje(tabela_uvoz$Les)
+
+
+
+
+
+## Izvoz ZDA v druge države sveta:
+
+# Funkcija "uvozi.tabelo1" na podlagi naslova (mesta, kjer imamo uvozeno tabelo in njejega naslova)
+# in kategorije izdelkov in storitev vrne tabelo, ki ima 3 stolpce (Partnerska država, Leto, 
+# Kategorija) in vsebuje za 10 letno obdobje (2006-2015) podatke o izvozu ZDA po posameznih 
+# kategorijah in državah.
+
+uvozi.tabelo1 <- function(naslov, products){
+  tabela <- read.csv2(naslov, skip=1, na.strings = ";", 
+                      stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
+                      col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
+                                    "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
+  tabela <- melt(tabela[,c(2,6:15)], variable.name = "Leto",
+                 value.name = products, na.rm = FALSE)
+  tabela$Leto <- tabela$Leto %>% as.character() %>%
+    strapplyc("([0-9]+)")
+  tabela$Leto <- tabela$Leto %>% as.numeric()
+  return(tabela)
 }
 
-for (i in 1:length(tabela_uvoz$Gorivo)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_uvoz$Gorivo[i]))&(i%%10 == 0)){
-      tabela_uvoz$Gorivo[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_uvoz$Gorivo[i]))&(i%%10 == k)){
-      tabela_uvoz$Gorivo[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
-}
-
-for (i in 1:length(tabela_uvoz$`Platika in guma`)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_uvoz$`Platika in guma`[i]))&(i%%10 == 0)){
-      tabela_uvoz$`Platika in guma`[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_uvoz$`Platika in guma`[i]))&(i%%10 == k)){
-      tabela_uvoz$`Platika in guma`[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
-}
-
-for (i in 1:length(tabela_uvoz$Les)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_uvoz$Les[i]))&(i%%10 == 0)){
-      tabela_uvoz$Les[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_uvoz$Les[i]))&(i%%10 == k)){
-      tabela_uvoz$Les[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
-}
+tabela_izvoz_vseh_produktov <- uvozi.tabelo1("podatki/export_all_product.csv", "Vsi_produkti")
+tabela_izvoz_zivali <- uvozi.tabelo1("podatki/export_animal.csv", "Zivali")
+tabela_izvoz_zelenjave <- uvozi.tabelo1("podatki/export_vegetable.csv", "Zelenjava")
+tabela_izvoz_goriva <- uvozi.tabelo1("podatki/export_fuels.csv", "Gorivo")
+tabela_izvoz_plastike_in_gume <- uvozi.tabelo1("podatki/export_plastic_or_rubber.csv", "Plastika_in_guma")
+tabela_izvoz_lesa <- uvozi.tabelo1("podatki/export_wood.csv", "Les")
 
 
 
-
-
-
-# Izvoz ZDA:
-
-tabela_izvoz_vseh_produktov <- read.csv2("podatki/export_all_product.csv", skip=1, na.strings = ";", 
-                                         stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                         col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                                       "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_izvoz_vseh_produktov <- melt(tabela_izvoz_vseh_produktov[,c(2,6:15)], variable.name = "Leto",
-                                    value.name = "Vsi produkti", na.rm = FALSE)
-tabela_izvoz_vseh_produktov$Leto <- tabela_izvoz_vseh_produktov$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_izvoz_vseh_produktov$Leto <- tabela_izvoz_vseh_produktov$Leto %>% as.numeric()
-
-
-
-tabela_izvoz_zivali <- read.csv2("podatki/export_animal.csv", skip=1, na.strings = ";", 
-                                 stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                 col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                               "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_izvoz_zivali <- melt(tabela_izvoz_zivali[,c(2,6:15)], variable.name = "Leto",
-                            value.name = "Živali", na.rm = FALSE)
-tabela_izvoz_zivali$Leto <- tabela_izvoz_zivali$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_izvoz_zivali$Leto <- tabela_izvoz_zivali$Leto %>% as.numeric()
-
-
-
-tabela_izvoz_zelenjave <- read.csv2("podatki/export_vegetable.csv", skip=1, na.strings = ";", 
-                                    stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                    col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                                  "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_izvoz_zelenjave <- melt(tabela_izvoz_zelenjave[,c(2,6:15)], variable.name = "Leto",
-                               value.name = "Zelenjava", na.rm = FALSE)
-tabela_izvoz_zelenjave$Leto <- tabela_izvoz_zelenjave$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_izvoz_zelenjave$Leto <- tabela_izvoz_zelenjave$Leto %>% as.numeric()
-
-
-
-tabela_izvoz_goriva <- read.csv2("podatki/export_fuels.csv", skip=1, na.strings = ";", 
-                                 stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                 col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                               "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_izvoz_goriva <- melt(tabela_izvoz_goriva[,c(2,6:15)], variable.name = "Leto",
-                            value.name = "Gorivo", na.rm = FALSE)
-tabela_izvoz_goriva$Leto <- tabela_izvoz_goriva$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_izvoz_goriva$Leto <- tabela_izvoz_goriva$Leto %>% as.numeric()
-
-
-
-tabela_izvoz_plastike_in_gume <- read.csv2("podatki/export_plastic_or_rubber.csv", skip=1, na.strings = ";", 
-                                           stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                                           col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                                         "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_izvoz_plastike_in_gume <- melt(tabela_izvoz_plastike_in_gume[,c(2,6:15)], variable.name = "Leto",
-                                      value.name = "Plastika in guma", na.rm = FALSE)
-tabela_izvoz_plastike_in_gume$Leto <- tabela_izvoz_plastike_in_gume$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_izvoz_plastike_in_gume$Leto <- tabela_izvoz_plastike_in_gume$Leto %>% as.numeric()
-
-
-
-tabela_izvoz_lesa <- read.csv2("podatki/export_wood.csv", skip=1, na.strings = ";", 
-                               stringsAsFactors = FALSE, fileEncoding = "Windows-1250", 
-                               col.names = c("ZDA", "Partner", "Vrsta trgovanja", "Produkti", "Indikator","2006", "2007", 
-                                             "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"))
-tabela_izvoz_lesa <- melt(tabela_izvoz_lesa[,c(2,6:15)], variable.name = "Leto",
-                          value.name = "Les", na.rm = FALSE)
-tabela_izvoz_lesa$Leto <- tabela_izvoz_lesa$Leto %>% as.character() %>%
-  strapplyc("([0-9]+)")
-tabela_izvoz_lesa$Leto <- tabela_izvoz_lesa$Leto %>% as.numeric()
-
-
-
-#SESTAVA SKUPNE TABELE 'tabela_izvoz':
+#SESTAVA SKUPNE TABELE "tabela_izvoz":
 
 tabela_izvoz <- merge(tabela_izvoz_vseh_produktov, tabela_izvoz_zivali, 
                      by = c("Partner", "Leto"), all.x = TRUE)
@@ -264,72 +130,13 @@ tabela_izvoz <- merge(tabela_izvoz, tabela_izvoz_lesa,
 
 # Urejanje in čiščenje podatkov v tabeli 'tabela_izvoz':
 
-for (i in 1:length(tabela_izvoz$Zelenjava)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_izvoz$Zelenjava[i]))&(i%%10 == 0)){
-      tabela_izvoz$Zelenjava[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_izvoz$Zelenjava[i]))&(i%%10 == k)){
-      tabela_izvoz$Zelenjava[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
-}
-
-for (i in 1:length(tabela_izvoz$`Vsi produkti`)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_izvoz$`Vsi produkti`[i]))&(i%%10 == 0)){
-      tabela_izvoz$`Vsi produkti`[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_izvoz$`Vsi produkti`[i]))&(i%%10 == k)){
-      tabela_izvoz$`Vsi produkti`[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
-}
-
-for (i in 1:length(tabela_izvoz$Živali)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_izvoz$Živali[i]))&(i%%10 == 0)){
-      tabela_izvoz$Živali[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_izvoz$Živali[i]))&(i%%10 == k)){
-      tabela_izvoz$Živali[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
-}
-
-for (i in 1:length(tabela_izvoz$Gorivo)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_izvoz$Gorivo[i]))&(i%%10 == 0)){
-      tabela_izvoz$Gorivo[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_izvoz$Gorivo[i]))&(i%%10 == k)){
-      tabela_izvoz$Gorivo[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
-}
-
-for (i in 1:length(tabela_izvoz$`Plastika in guma`)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_izvoz$`Plastika in guma`[i]))&(i%%10 == 0)){
-      tabela_izvoz$`Plastika in guma`[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_izvoz$`Plastika in guma`[i]))&(i%%10 == k)){
-      tabela_izvoz$`Plastika in guma`[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
-}
-
-for (i in 1:length(tabela_izvoz$Les)) {
-  for (k in 1:9) {
-    if ((is.na(tabela_izvoz$Les[i]))&(i%%10 == 0)){
-      tabela_izvoz$Les[(i-9): i] <- c(rep(NA,10))
-    }
-    else if ((is.na(tabela_izvoz$Les[i]))&(i%%10 == k)){
-      tabela_izvoz$Les[(i-k+1): (i+10-k)] <- c(rep(NA,10))
-    }
-  }
-}
-
+# Uporabimo zgoraj napisano funkcijo "ciscenje":
+tabela_izvoz$Zelenjava <- ciscenje(tabela_izvoz$Zelenjava)
+tabela_izvoz$Vsi_produkti <- ciscenje(tabela_izvoz$Vsi_produkti)
+tabela_izvoz$Zivali <- ciscenje(tabela_izvoz$Zivali)
+tabela_izvoz$Gorivo <- ciscenje(tabela_izvoz$Gorivo)
+tabela_izvoz$Plastika_in_guma <- ciscenje(tabela_izvoz$Plastika_in_guma)
+tabela_izvoz$Les <- ciscenje(tabela_izvoz$Les)
 
 
 
