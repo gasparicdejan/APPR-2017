@@ -60,6 +60,12 @@ tabela_uvoz <- merge(tabela_uvoz, tabela_uvoz_lesa,
 
 # Urejanje in čiščenje podatkov v tabeli "tabela_uvoz":
 
+# Funkcija "ciscenje" vzame določen stolpec v tabeli in ga presicti tako, da ce za katero
+# leto ni podatkov (imamo vrednost NA) funkcija za tisto drzavo v doloceni vrstici (kategoriji)
+# za vsa leta vrne NA.
+# Namen je, da ce nimamo podatkov za drzavo v dolocenem letu (izmed 10let) v doloceni kategoriji
+# potem jih ne rabimo za nobeno leto, saj ne bomo morali spremljati spremembe skozi leta.
+
 ciscenje <- function(kategorija){
   for (i in 1:length(kategorija)) {
     for (k in 1:9) {
