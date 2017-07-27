@@ -8,14 +8,12 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18.
 
 ## Tematika
 
-Vsebina, ki jo bom obravnaval pri tem projektu obsega trgovanje ZDA. V obsegu analize bom obravnaval izvoz in uvoz ZDA z drugimi državami sveta od leta 2011 do vključno z letom 2015. Za večje države, s katerimi ZDA trguje, bom prikazal uvoz in izvoz nekaj glavnih kategorij produktov ter uvoz in izvoz vseh produktov skupaj, ki jih uvaža oziroma izvaža ZDA v te države. Podatki bodo v velikosti tisoč ameriških dolarjih (USD) na enoto.
+Vsebina, ki jo bom obravnaval pri tem projektu obsega trgovanje ZDA. V obsegu analize bom obravnaval izvoz in uvoz ZDA z drugimi državami sveta za obdobje 10let (2006-2015). Za večje države, s katerimi ZDA trguje, bom prikazal uvoz in izvoz nekaj glavnih kategorij produktov ter uvoz in izvoz vseh produktov skupaj, ki jih uvaža oziroma izvaža ZDA v te države. Podatki bodo v velikosti tisoč ameriških dolarjih (USD) na enoto.
 
 Podatke bom pridobil na spletnih straneh:
 - https://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States;
-- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2011/EndYear/2015/TradeFlow/Import/Indicator/MPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
-- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2010/TradeFlow/Import/Indicator/MPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
-- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2011/EndYear/2015/TradeFlow/Export/Indicator/XPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
-- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2010/TradeFlow/Export/Indicator/XPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
+- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2015/TradeFlow/Import/Indicator/MPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
+- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2015/TradeFlow/Export/Indicator/XPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
 - ostale povezave sledijo iz klasifikacije po produktih izmed zadnjih dveh povezav.
 
 Podatki so v obliki HTML in CSV. 
