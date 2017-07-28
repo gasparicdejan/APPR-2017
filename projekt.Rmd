@@ -21,15 +21,38 @@ source("lib/libraries.r", encoding = "UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+Vsebina projekta pri predmetu APPR, ki ga bom izdeloval obsega trgovanje ZDA. V obsegu analize bom obravnaval izvoz in uvoz ZDA z drugimi državami sveta za obdobje 10let (2006-2015). Za države, ki so med največjimi uvoznicami/izvoznicami z ZDA, bom prikazal uvoz/izvoz nekaj glavnih kategorij produktov in uvoz/izvoz vseh produktov skupaj (celotnega uvoza/izvoza), ki jih uvaža/izvaža ZDA v te države. Podatki bodo v velikosti tisoč ameriških dolarjih (1000 USD) na enoto.
 
-***
+Podatke bom pridobil na spletnih straneh:
+- http://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States;
+- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2015/TradeFlow/Import/Indicator/MPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
+- http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2015/TradeFlow/Export/Indicator/XPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
+- ostale povezave sledijo iz klasifikacije po produktih izmed zadnjih dveh povezav.
 
-# Obdelava, uvoz in čiščenje podatkov
+Podatki so v obliki HTML in CSV. 
 
 ```{r uvoz, echo=FALSE, message=FALSE}
 source("uvoz/uvoz.r", encoding = "UTF-8")
 ```
+
+## Plan dela
+
+Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kakšna je trgovska bilanca in koliko ter kako se izvoz in uvoz spreminjata skozi čas v zadnjih letih pri največjih uvoznikih/izvoznikih. Podatke nameravam geografsko tudi prikazati in izvesti analizo razvrščanja na njih.
+
+
+# Obdelava, uvoz in čiščenje podatkov
+
+Podatke sem uvozil s pomočjo funkcij, ki sem jih napisal tako, da imam podatke ločene za uvoz in izvoz v večih tabelah. V prvotnih tabelah stolpci predstavljajo leto, vrstice pa države s katerimi ZDA trguje. Nato sem sestavil tabeli za celotni uvoz in celotni izvoz, kjer vrstice predstavljajo države (vsaka vrstica za eno leto), stolpci pa kategorije produktov.
+Ker podatki ne vsebujejo podatkov za vse države v vseh opazovanih letih, sem podatke očistil tako, da sem poskrbel, da so podatki za vsa leta v določeni kategoriji dosegljivi za določeno državo (kjer je v določeni kategoriji manjkal podatek za kakšno leto, sem celotno obdobje izključil iz analize v tej kategoriji za to državo, saj če manjka en podatek ne moremo spremljati kako sespreminja uvoz/izvoz skozi leta za tisto kategorijo).
+
+[OBRAZLOŽI KAKO SI UVOZIL (vsako funkcijo posebaj)]
+[PREDSTAVI TABELE]
+
+
+
+
+
+
 
 Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
 z Wikipedije. Poglejmo si začetka obeh uvoženih razpredelnic.
