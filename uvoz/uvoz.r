@@ -17,10 +17,10 @@ library(reshape2)
 
 ## Uvoz ZDA iz drugih držav sveta:
 
-# Funkcija "uvozi.tabelo" na podlagi naslova (mesta, kjer imamo uvozeno tabelo in njejega naslova)
-# in kategorije izdelkov in storitev vrne tabelo, ki ima 3 stolpce (Partnerska država, Leto, 
-# Kategorija) in vsebuje za 10 letno obdobje (2006-2015) podatke o uvozu ZDA po posameznih 
-# kategorijah in državah.
+# Funkcija "uvozi.tabelo" na podlagi naslova (mesta, kjer imamo uvozeno tabelo in 
+# njejega naslova) in kategorije izdelkov in storitev vrne tabelo, ki ima 3 stolpce 
+# (Partnerska država, Leto, Kategorija) in vsebuje za 10 letno obdobje (2006-2015) 
+# podatke o uvozu ZDA po posameznih kategorijah in državah.
 
 uvozi.tabelo <- function(naslov, products){
   tabela <- read.csv2(naslov, skip=1, na.strings = ";", 
@@ -60,11 +60,11 @@ tabela_uvoz <- merge(tabela_uvoz, tabela_uvoz_lesa,
 
 # Urejanje in čiščenje podatkov v tabeli "tabela_uvoz":
 
-# Funkcija "ciscenje" vzame določen stolpec v tabeli in ga presicti tako, da ce za katero
-# leto ni podatkov (imamo vrednost NA) funkcija za tisto drzavo v doloceni vrstici (kategoriji)
-# za vsa leta vrne NA.
-# Namen je, da ce nimamo podatkov za drzavo v dolocenem letu (izmed 10let) v doloceni kategoriji
-# potem jih ne rabimo za nobeno leto, saj ne bomo morali spremljati spremembe skozi leta.
+# Funkcija "ciscenje" vzame določen stolpec v tabeli in ga presisci tako, da ce za katero
+# leto ni podatkov (imamo vrednost NA) funkcija za tisto drzavo v doloceni vrstici 
+# (kategoriji) za vsa leta vrne NA. Namen funkcije je, da ce nimamo podatkov za drzavo v 
+# dolocenem letu (izmed 10let) v doloceni kategoriji potem jih ne rabimo za nobeno leto, 
+# saj ne moremo spremljati spremembe skozi leta.
 
 ciscenje <- function(kategorija){
   for (i in 1:length(kategorija)) {
@@ -93,10 +93,10 @@ tabela_uvoz$Les <- ciscenje(tabela_uvoz$Les)
 
 ## Izvoz ZDA v druge države sveta:
 
-# Funkcija "uvozi.tabelo1" na podlagi naslova (mesta, kjer imamo uvozeno tabelo in njejega naslova)
-# in kategorije izdelkov in storitev vrne tabelo, ki ima 3 stolpce (Partnerska država, Leto, 
-# Kategorija) in vsebuje za 10 letno obdobje (2006-2015) podatke o izvozu ZDA po posameznih 
-# kategorijah in državah.
+# Funkcija "uvozi.tabelo1" na podlagi naslova (mesta, kjer imamo uvozeno tabelo in 
+# njejega naslova) in kategorije izdelkov in storitev vrne tabelo, ki ima 3 stolpce 
+# (Partnerska država, Leto, Kategorija) in vsebuje za 10 letno obdobje (2006-2015) 
+# podatke o izvozu ZDA po posameznih kategorijah in državah.
 
 uvozi.tabelo1 <- function(naslov, products){
   tabela <- read.csv2(naslov, skip=1, na.strings = ";", 
@@ -134,7 +134,7 @@ tabela_izvoz <- merge(tabela_izvoz, tabela_izvoz_lesa,
                      by = c("Partner", "Leto"), all.x = TRUE)
 
 
-# Urejanje in čiščenje podatkov v tabeli 'tabela_izvoz':
+# Urejanje in čiščenje podatkov v tabeli "tabela_izvoz":
 
 # Uporabimo zgoraj napisano funkcijo "ciscenje":
 tabela_izvoz$Zelenjava <- ciscenje(tabela_izvoz$Zelenjava)
@@ -148,13 +148,15 @@ tabela_izvoz$Les <- ciscenje(tabela_izvoz$Les)
 
 
 
-# PODATKI V OBLIKI xml :
+############################### PODATKI V OBLIKI HTML: ###############################
 
 library(rvest)
 library(dplyr)
 library(gsubfn)
 
-# uvoz tabele držav, za katere je ZDA glavni partner v izvozu 2014 v % :
+## Izvoz ZDA v druge države sveta:
+
+# Uvoz tabele držav, za katere je ZDA glavni partner v izvozu 2014 v % :
 
 link1 <- "http://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States"
 stran1 <- html_session(link1) %>% read_html()
@@ -168,7 +170,10 @@ tabela_partnerstvo_izvoz$Država <- tabela_partnerstvo_izvoz$Država %>%
 
 
 
-# uvoz tabele držav, za katere je ZDA glavni partner v uvozu 2014 v % :
+## Izvoz ZDA iz drugih držav sveta:
+
+# Uvoz tabele držav, za katere je ZDA glavni partner v uvozu 2014 v % :
+
 link2 <- "http://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States"
 stran2 <- html_session(link2) %>% read_html()
 tabela_partnerstvo_uvoz <- stran2 %>% html_nodes(xpath="//table[@class='wikitable sortable']") %>% .[[2]] %>% html_table()
