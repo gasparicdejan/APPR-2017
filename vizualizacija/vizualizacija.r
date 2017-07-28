@@ -1,7 +1,6 @@
 # 3. faza: Vizualizacija podatkov
 
 library(knitr)
-
 library(ggplot2)
 library(dplyr)
 require(gsubfn)
@@ -66,10 +65,14 @@ graf2 <- narisi.graf1(2015,10)
 
 ############################## ZEMLJEVIDI: ##############################
 
-# Uvozimo zemljevid.
+# Uvozimo zemljevid in ga pretvorimo:
 svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
                         "ne_50m_admin_0_countries", encoding = "Windows-1252")
 sv1 <- pretvori.zemljevid(svet)
+
+
+# Zemljevid v pretvorjeni obliki ima za določene države druga imena, kot so v podatkih, zato
+# za vsako državo, ki ima drugo ime prilagodimo tako, da se imeni ujemata.
 
 sv1$name_long <- as.character(sv1$name_long)
 sv1$name_long[sv1$name_long == "Anguilla"] <- "Anguila"
@@ -111,22 +114,28 @@ sv1$name_long[sv1$name_long == "Saint Vincent and the Grenadines"] <- "St. Vince
 
 
 
-Izvoz <- filter(tabela_uvoz, Leto == 2015)
+# Tabela "Izvoz" bo predstavljalo tabelo podatkov za leto 2015. 
+Izvoz <- filter(tabela_izvoz, Leto == 2015)
 Izvoz$Partner <- factor(Izvoz$Partner)
 
+# Nastavimo tako, da se v tabeli sv1, stolpec name_long ujema z stolpcem Partner v tabeli Izvoz:
 sv1$name_long <- factor(sv1$name_long, levels = levels(Izvoz$Partner))
 
+# NArišemo zemljevid za izvoz ZDA:
 zem1 <- ggplot() +
   geom_polygon(data = Izvoz %>%
                  right_join(sv1, by = c("Partner" = "name_long")),
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
-               color = "grey") +
-  scale_fill_continuous(low = "#69b8f6", high = "#142d45") + xlab("") +
+               color = "grey") + ggtitle("Celotni izvoz ZDA v države po svetu v letu 2015")+
+  scale_fill_gradient(low = "Ghostwhite", high = "green", guide = "colourbar") + xlab("")+
   ylab("")
 
 print(zem1)
 
 
+
+# Zemljevid pretvorimo in ker ima v pretvorjeni obliki za določene države druga imena, kot so 
+# v podatkih, za vsako državo, ki ima drugo ime prilagodimo tako, da se imeni ujemata.
 
 sv2 <- pretvori.zemljevid(svet)
 
@@ -169,17 +178,20 @@ sv2$name_long[sv2$name_long == "Cook Islands"] <- "Cocos (Keeling) Islands"
 sv2$name_long[sv2$name_long == "Saint Vincent and the Grenadines"] <- "St. Vincent and the Grenadines"
 
 
+# Tabela "Uvoz" bo predstavljalo tabelo podatkov za leto 2015. 
 Uvoz <- filter(tabela_uvoz, Leto == 2015)
 Uvoz$Partner <- factor(Uvoz$Partner)
 
+# Nastavimo tako, da se v tabeli sv1, stolpec name_long ujema z stolpcem Partner v tabeli Izvoz:
 sv2$name_long<- factor(sv2$name_long, levels = levels(Uvoz$Partner))
 
+# NArišemo zemljevid za uvoz ZDA:
 zem2 <- ggplot() +
   geom_polygon(data = Uvoz %>%
                  right_join(sv2, by = c("Partner" = "name_long")),
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
-               color = "grey") +
-  scale_fill_continuous(low = "#69b8f6", high = "#142d45") + xlab("") +
+               color = "grey") + ggtitle("Celotni uvoz ZDA iz držav po svetu v letu 2015")+
+  scale_fill_gradient(low = "Ghostwhite", high = "brown3", guide = "colourbar")+ xlab("")+
   ylab("")
 
 print(zem2)
