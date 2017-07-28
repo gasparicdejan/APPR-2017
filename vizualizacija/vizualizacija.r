@@ -33,7 +33,16 @@ narisi.graf <- function(leto, stev){
   return(narisi)
 }
 
-graf1 <- narisi.graf(2015,10)
+graf1 <- narisi.graf(2006,10)
+graf2 <- narisi.graf(2007,10)
+graf3 <- narisi.graf(2008,10)
+graf4 <- narisi.graf(2009,10)
+graf5 <- narisi.graf(2010,10)
+graf6 <- narisi.graf(2011,10)
+graf7 <- narisi.graf(2012,10)
+graf8 <- narisi.graf(2013,10)
+graf9 <- narisi.graf(2014,10)
+graf10 <- narisi.graf(2015,10)
 
 
 
@@ -56,7 +65,16 @@ narisi.graf1 <- function(leto, stev){
   return(narisi)
 }
 
-graf2 <- narisi.graf1(2015,10)
+graf11 <- narisi.graf1(2006,10)
+graf12 <- narisi.graf1(2007,10)
+graf13 <- narisi.graf1(2008,10)
+graf14 <- narisi.graf1(2009,10)
+graf15 <- narisi.graf1(2010,10)
+graf16 <- narisi.graf1(2011,10)
+graf17 <- narisi.graf1(2012,10)
+graf18 <- narisi.graf1(2013,10)
+graf19 <- narisi.graf1(2014,10)
+graf20 <- narisi.graf1(2015,10)
 
 
 
