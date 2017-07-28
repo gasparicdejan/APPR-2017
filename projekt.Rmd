@@ -43,7 +43,7 @@ Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kakš
 # Obdelava, uvoz in čiščenje podatkov
 
 Podatke sem uvozil s pomočjo funkcij, ki sem jih napisal tako, da imam podatke ločene za uvoz in izvoz v večih tabelah. V prvotnih tabelah stolpci predstavljajo leto, vrstice pa države s katerimi ZDA trguje. Nato sem sestavil tabeli za celotni uvoz in celotni izvoz, kjer vrstice predstavljajo države (vsaka vrstica za eno leto), stolpci pa kategorije produktov.
-Ker podatki ne vsebujejo podatkov za vse države v vseh opazovanih letih, sem podatke očistil tako, da sem poskrbel, da so podatki za vsa leta v določeni kategoriji dosegljivi za določeno državo (kjer je v določeni kategoriji manjkal podatek za kakšno leto, sem celotno obdobje izključil iz analize v tej kategoriji za to državo, saj če manjka en podatek ne moremo spremljati kako sespreminja uvoz/izvoz skozi leta za tisto kategorijo).
+Ker podatki ne vsebujejo podatkov za vse države v vseh opazovanih letih, sem podatke očistil tako, da sem poskrbel, da so podatki za vsa leta v določeni kategoriji dosegljivi za določeno državo (kjer je v določeni kategoriji manjkal podatek za kakšno leto, sem celotno obdobje izključil iz analize v tej kategoriji za to državo, saj če manjka en podatek ne moremo spremljati kako se spreminja uvoz/izvoz skozi leta za tisto kategorijo).
 
 [OBRAZLOŽI KAKO SI UVOZIL (vsako funkcijo posebaj)]
 [PREDSTAVI TABELE]
