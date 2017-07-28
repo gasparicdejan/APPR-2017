@@ -1,4 +1,5 @@
-# Uvoz potrebnih knjižnic
+# Uvoz potrebnih knjižnic:
+
 library(sp)
 library(maptools)
 library(digest)
@@ -24,6 +25,7 @@ gpclibPermit()
 #
 # Vrača:
 #   * zemljevid (SpatialPolygonsDataFrame) iz pobranega arhiva
+
 uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
                             encoding = "UTF-8", force = FALSE) {
   ime.zemljevida <- digest(url, algo = "sha1")
