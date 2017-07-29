@@ -103,18 +103,30 @@ Sledilo je urejanje tabele "tabela_izvoz" s pomočjo funkcije "čiščenje".
 Za zgled si oglejmo začetka obeh glavnih tabel ("tabela_uvoz" in "tabela_izvoz"):
 
 ```{r razpredelnice}
-kable(head(tabela_uvoz))
+kable(head(tabela_uvoz), caption = "Tabela uvoza ZDA v države sveta za obdobje 2006-2015" )
 
-head(tabela_izvoz)
+kable(head(tabela_izvoz), caption = "Tabela izvoza ZDA iz držav sveta za obdobje 2006-2015")
 ```
 
-***
 
-# Vizualizacija podatkov
+
+# Vizualizacija in analiza podatkov
 
 ```{r vizualizacija, echo=FALSE, message=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
+```{r analiza, echo=FALSE, message=FALSE}
+source("analiza/analiza.r", encoding = "UTF-8")
+```
+
+
+
+
+
+
+
+
+
 
 Slika \ref{fig:zemljevid} prikazuje povprečno velikost družine za vsako občino.
 
@@ -125,13 +137,7 @@ ggplot() + geom_polygon(data = left_join(zemljevid, povprecja, by = c("OB_UIME" 
   guides(fill = guide_colorbar(title = "Povprečje"))
 ```
 
-***
 
-# Napredna analiza podatkov
-
-```{r analiza, echo=FALSE, message=FALSE}
-source("analiza/analiza.r", encoding = "UTF-8")
-```
 
 Slika \ref{fig:graf} prikazuje povezavo med številom naselij in površino občine.
 
