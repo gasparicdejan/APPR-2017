@@ -60,7 +60,7 @@ tabela_uvoz <- merge(tabela_uvoz, tabela_uvoz_lesa,
 
 # Urejanje in čiščenje podatkov v tabeli "tabela_uvoz":
 
-# Funkcija "ciscenje" vzame določen stolpec v tabeli in ga presisci tako, da ce za katero
+# Funkcija "ciscenje" vzame določen stolpec v tabeli in ga precisci tako, da ce za katero
 # leto ni podatkov (imamo vrednost NA) funkcija za tisto drzavo v doloceni vrstici 
 # (kategoriji) za vsa leta vrne NA. Namen funkcije je, da ce nimamo podatkov za drzavo v 
 # dolocenem letu (izmed 10let) v doloceni kategoriji potem jih ne rabimo za nobeno leto, 
@@ -156,7 +156,7 @@ library(gsubfn)
 
 ## Izvoz ZDA v druge države sveta:
 
-# Uvoz tabele držav, za katere je ZDA glavni partner v izvozu 2014 v % :
+# Uvoz tabele držav, za katere je ZDA glavni partner v izvozu za leto 2014 v % :
 
 link1 <- "http://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States"
 stran1 <- html_session(link1) %>% read_html()
@@ -172,7 +172,7 @@ tabela_partnerstvo_izvoz$Država <- tabela_partnerstvo_izvoz$Država %>%
 
 ## Izvoz ZDA iz drugih držav sveta:
 
-# Uvoz tabele držav, za katere je ZDA glavni partner v uvozu 2014 v % :
+# Uvoz tabele držav, za katere je ZDA glavni partner v uvozu za leto 2014 v % :
 
 link2 <- "http://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States"
 stran2 <- html_session(link2) %>% read_html()

@@ -31,9 +31,6 @@ Podatke bom pridobil na spletnih straneh:
 
 Podatki so v obliki HTML in CSV. 
 
-```{r uvoz, echo=FALSE, message=FALSE}
-source("uvoz/uvoz.r", encoding = "UTF-8")
-```
 
 ## Plan dela
 
@@ -42,36 +39,78 @@ Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kakš
 
 # Obdelava, uvoz in čiščenje podatkov
 
+```{r uvoz, echo=FALSE, message=FALSE}
+source("uvoz/uvoz.r", encoding = "UTF-8")
+```
+
 Podatke sem uvozil s pomočjo funkcij, ki sem jih napisal tako, da imam podatke ločene za uvoz in izvoz v večih tabelah. V prvotnih tabelah stolpci predstavljajo leto, vrstice pa države s katerimi ZDA trguje. Nato sem sestavil tabeli za celotni uvoz in celotni izvoz, kjer vrstice predstavljajo države (vsaka vrstica za eno leto), stolpci pa kategorije produktov.
 Ker podatki ne vsebujejo podatkov za vse države v vseh opazovanih letih, sem podatke očistil tako, da sem poskrbel, da so podatki za vsa leta v določeni kategoriji dosegljivi za določeno državo (kjer je v določeni kategoriji manjkal podatek za kakšno leto, sem celotno obdobje izključil iz analize v tej kategoriji za to državo, saj če manjka en podatek ne moremo spremljati kako se spreminja uvoz/izvoz skozi leta za tisto kategorijo).
 
-[OBRAZLOŽI KAKO SI UVOZIL (vsako funkcijo posebaj)]
-[PREDSTAVI TABELE]
+1. Tabele uvožene z funkcijo "uvozi.tabelo":
+
+- i. stolpec (character): Partnerji (iz katerih držav ZDA uvaža)
+- ii. stolpec (numeric): Leto (2006-2015)
+- iii. stolpec (numeric): kategorija (vsi produkti, gorivo, živali,...)
+
+Nato sem na podlagi uvoženih tabel z zgoraj omenjeno funkcijo sestavil tabelo "tabela_uvoz", ki
+je sestavljena na naslednji način:
+
+- i. stolpec (character): Partnerji (iz katerih držav ZDA uvaža)
+- ii. stolpec (numeric): Leto (2006-2015)
+- iii. stolpec (numeric): Vsi produkti (celoten uvoz) 
+- iv. stolpec (numeric): Zivali
+- v. stolpec (numeric): Zelenjava
+- vi. stolpec (numeric): Gorivo
+- vii. stolpec (numeric): Plastika in guma
+- viii. stolpec (numeric): Les
+
+Sledilo je urejanje tabele "tabela_uvoz" s pomočjo funkcije "čiščenje", ki vzame določen stolpec v tabeli in ga prečiščii tako, da če za katero leto ni podatkov (imamo vrednost NA) funkcija za tisto državo v določeni vrstici (kategoriji) za vsa leta vrne NA. Namen funkcije je, da če nimamo podatkov za državo v določenem letu (izmed 10let) v določeni kategoriji potem jih ne rabimo za nobeno leto, saj ne moremo spremljati spremembe skozi leta.
 
 
+2. Tabele uvožene z funkcijo "uvozi.tabelo1":
+
+- i. stolpec (character): Partnerji (v katere države ZDA izvaža)
+- ii. stolpec (numeric): Leto (2006-2015)
+- iii. stolpec (numeric): kategorija (vsi produkti, Gorivo, Zivali,...)
+
+Nato sem na podlagi uvoženih tabel z zgoraj omenjeno funkcijo sestavil tabelo "tabela_izvoz", ki
+je sestavljena na naslednji način:
+
+- i. stolpec (character): Partnerji (v katere države ZDA izvaža)
+- ii. stolpec (numeric): Leto (2006-2015)
+- iii. stolpec (numeric): Vsi produkti (celoten izvoz) 
+- iv. stolpec (numeric): Zivali
+- v. stolpec (numeric): Zelenjava
+- vi. stolpec (numeric): Gorivo
+- vii. stolpec (numeric): Plastika in guma
+- viii. stolpec (numeric): Les
+
+Sledilo je urejanje tabele "tabela_izvoz" s pomočjo funkcije "čiščenje".
 
 
+3. Tabela "tabela_partnerstvo_izvoz":
+
+- i. stolpec (character): Države (za katere je ZDA njihov največji izvoznik za podatke iz leta 2014)
+- ii. stolpec (numeric): Procent (višina izvoza ZDA iz določene države v %)
 
 
+4. Tabela "tabela_partnerstvo_uvoz":
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Poglejmo si začetka obeh uvoženih razpredelnic.
+- i. stolpec (character): Države (za katere je ZDA njihov največji uvoznik za podatke iz leta 2014)
+- ii. stolpec (numeric): Procent (višina uvoza ZDA iz določene države v %)
+
+
+Za zgled si oglejmo začetka obeh glavnih tabel ("tabela_uvoz" in "tabela_izvoz"):
 
 ```{r razpredelnice}
-kable(head(druzine))
-head(obcine)
-```
+kable(head(tabela_uvoz))
 
-Slika \ref{fig:histogram} prikazuje porazdelitev števila naselij v občinah.
-
-```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x = naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
+head(tabela_izvoz)
 ```
 
 ***
 
-# Analiza in vizualizacija podatkov
+# Vizualizacija podatkov
 
 ```{r vizualizacija, echo=FALSE, message=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
