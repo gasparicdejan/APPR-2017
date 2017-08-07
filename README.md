@@ -8,7 +8,7 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18.
 
 ## Tematika
 
-Vsebina projekta pri predmetu APPR, ki ga bom izdeloval obsega trgovanje ZDA. V obsegu analize bom obravnaval izvoz in uvoz ZDA z drugimi državami sveta za obdobje 10let (2006-2015). Za države, ki so med največjimi uvoznicami/izvoznicami z ZDA, bom prikazal uvoz/izvoz nekaj glavnih kategorij produktov in uvoz/izvoz vseh produktov skupaj (celotnega uvoza/izvoza), ki jih uvaža/izvaža ZDA v te države. Podatki bodo v velikosti tisoč ameriških dolarjih (1000 USD) na enoto.
+Vsebina projekta pri predmetu APPR, ki ga bom izdeloval obsega trgovanje ZDA. V obsegu analize bom obravnaval izvoz in uvoz ZDA z drugimi državami sveta za obdobje 10 let (2006-2015). Za države, ki so med največjimi uvoznicami/izvoznicami z ZDA, bom prikazal uvoz/izvoz nekaj glavnih kategorij produktov in uvoz/izvoz vseh produktov skupaj (celotnega uvoza/izvoza), ki jih uvaža/izvaža ZDA v te države. Podatki bodo v velikosti tisoč ameriških dolarjev (1000 USD).
 
 Podatke bom pridobil na spletnih straneh:
 - http://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States;
@@ -20,7 +20,7 @@ Podatki so v obliki HTML in CSV.
 
 ## Podatkovni model
 
-Podatki bodo predstavljeni posamično za uvoz in izvoz v večih tabelah. V prvotnih tabelah bodo stolpci predstavljali leta izvoza/uvoza ter vrstice države s katerimi ZDA trguje. Naprej bom sestavil tabeli za celotni uvoz in celotni izvoz, kjer bodo vrstice predstavljale države za vsako leto posebaj, stolpci pa kategorije produktov. Ker podatki ne vsebujejo podatkov za vse države v vseh opazovanih letih, bom podatke očistil tako, da bom poskrbel, da so podatki za vsa leta v določeni kategoriji dosegljivi za določeno državo (kjer v določeni kategoriji manjka podatek za kakšno leto, bom celotno obdobje izključil iz analize v tej kategoriji za to državo, saj če manjka en podatek ne moremo spremljati kako se spreminja uvoz/izvoz skozi leta za tisto kategorijo).
+Podatki bodo predstavljeni posamezno za uvoz in izvoz v večih tabelah. V prvotnih tabelah bodo stolpci predstavljali leta izvoza/uvoza ter vrstice države s katerimi ZDA trguje. Naprej bom sestavil tabeli za celotni uvoz in celotni izvoz, kjer bodo vrstice predstavljale države za vsako leto posebaj, stolpci pa kategorije produktov. Ker podatki ne vsebujejo podatkov za vse države v vseh opazovanih letih, bom podatke očistil tako, da bom poskrbel, da so podatki za vsa leta v določeni kategoriji dosegljivi za določeno državo (kjer v določeni kategoriji manjka podatek za kakšno leto, bom celotno obdobje izključil iz analize v tej kategoriji za to državo, saj če manjka en podatek ne moremo spremljati kako se spreminja uvoz/izvoz skozi leta za tisto kategorijo).
 
 
 ## Plan dela
