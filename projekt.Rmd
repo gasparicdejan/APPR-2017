@@ -35,7 +35,7 @@ Podatki so v obliki HTML in CSV.
 
 ## Plan dela
 
-Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kakšna je trgovska bilanca in koliko ter kako se izvoz in uvoz spreminjata skozi čas v zadnjih letih pri največjih uvoznikih/izvoznikih. Podatke nameravam geografsko tudi prikazati in izvesti analizo razvrščanja na njih.
+Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kakšna je trgovinska bilanca in koliko ter kako se izvoz in uvoz spreminjata skozi čas v zadnjih letih pri največjih uvoznikih/izvoznikih. Podatke nameravam geografsko tudi prikazati.
 
 ***
 
@@ -48,7 +48,7 @@ source("uvoz/uvoz.r", encoding = "UTF-8")
 Podatke sem uvozil s pomočjo funkcij, ki sem jih napisal tako, da imam podatke ločene za uvoz in izvoz v večih tabelah. V prvotnih tabelah stolpci predstavljajo leto, vrstice pa države s katerimi ZDA trguje. Nato sem sestavil tabeli za celotni uvoz in celotni izvoz, kjer vrstice predstavljajo države (vsaka vrstica za eno leto), stolpci pa kategorije produktov.
 Ker podatki ne vsebujejo podatkov za vse države v vseh opazovanih letih, sem podatke očistil tako, da sem poskrbel, da so podatki za vsa leta v določeni kategoriji dosegljivi za določeno državo (kjer je v določeni kategoriji manjkal podatek za kakšno leto, sem celotno obdobje izključil iz analize v tej kategoriji za to državo, saj če manjka en podatek ne moremo spremljati kako se spreminja uvoz/izvoz skozi leta za tisto kategorijo).
 
-1. Tabele uvožene z funkcijo "uvozi.tabelo":
+1. Tabele uvožene s funkcijo "uvozi.tabelo":
 
 - i. stolpec (character): Partnerji (iz katerih držav ZDA uvaža)
 - ii. stolpec (numeric): Leto (2006-2015)
@@ -69,7 +69,7 @@ je sestavljena na naslednji način:
 Sledilo je urejanje tabele "tabela_uvoz" s pomočjo funkcije "ciscenje", ki vzame določen stolpec v tabeli in ga prečiščii tako, da če za katero leto ni podatkov (imamo vrednost NA) funkcija za tisto državo v določeni vrstici (kategoriji) za vsa leta vrne NA. Namen funkcije je, da če nimamo podatkov za državo v določenem letu (izmed 10let) v določeni kategoriji potem jih ne rabimo za nobeno leto, saj ne moremo spremljati spremembe skozi leta.
 
 
-2. Tabele uvožene z funkcijo "uvozi.tabelo1":
+2. Tabele uvožene s funkcijo "uvozi.tabelo1":
 
 - i. stolpec (character): Partnerji (v katere države ZDA izvaža)
 - ii. stolpec (numeric): Leto (2006-2015)
@@ -143,10 +143,19 @@ print(graf15)
 print(graf20)
 ```
 
-Ugotovimo, da je največja uvoznica iz ZDA Kanada, nato Mehika, veliko manj Kitajska in druge države. Zanimivo je, da je v letu 2009 mogoče opaziti znatno zmanjšanje izvoza in uvoza, nakar se pa v letu 2010 spet začne povečevati.
+Ugotovimo, da ZDA največ izvaža v Kanado, nato Mehiko, veliko manj Kitajska in druge države. Zanimivo je, da je v letu 2009 mogoče opaziti znatno zmanjšanje izvoza in uvoza ZDA, nakar se pa v letu 2010 spet začneta oba povečevati.
 
-Nadaljeval sem z risanjem zemljevidov. Najprej sem uvozil zemljevid in spremenil imena držav, ki niso bila enaka na zemljevidu in v podatkih, nato pa sem narisal zemljevid za izvoz v letu 2015 in nato še zemljevid za uvoz v letu 2015. 
-Zemljevid uvoza ZDA v letu 2015 sledi:
+
+Nadaljeval sem z risanjem zemljevidov. Najprej sem uvozil zemljevid in spremenil imena držav, ki niso bila enaka na zemljevidu in v podatkih, nato pa sem narisal zemljevid za izvoz v letu 2015 in nato še zemljevid za uvoz v letu 2015. Predstavljena zemljevida sledita:
+
+```{r zem1, echo=FALSE, fig.align='center'}
+print(zem1 + geom_polygon(data = Izvoz %>%
+                 right_join(sv1, by = c("Partner" = "name_long")),
+               aes(x=long, y=lat, group = group, fill = Vsi_produkti),
+               color = "grey") + ggtitle("Celotni izvoz ZDA v države po svetu v letu 2015")+
+  scale_fill_gradient(low = "Ghostwhite", high = "green", guide = "colourbar") + xlab("")+
+  ylab(""))
+```
 
 ```{r zem2, echo=FALSE, fig.align='center'}
 print(zem2 + geom_polygon(data = Uvoz %>%
@@ -174,8 +183,8 @@ print(zem3 + geom_polygon(data = Bilanca %>%
   ylab(""))
 ```
 
-Ugotovil sem, da je največja razlika v trgovinski bilanci z Kitajsko, saj tja ZDA ne izvozi veliko v primerjavi s tem koliko uvozi. Videti je mogoče, da ima ZDA z večino držav sveta pozitivno trgovinsko bilanco.
+Ugotovil sem, da je največja razlika v trgovinski bilanci z Kitajsko, saj tja ZDA ne izvozi veliko v primerjavi s tem koliko uvozi. Videti je mogoče, da ima ZDA z večino držav sveta pozitivno trgovinsko bilanco. Vemo da velja ZDA za velesilo, zato je tudi njihova trgovina močno razširjena.
 
 ***
 # Zaključek
-Pri obravnavi trgovanja ZDA sem veliko izvedel o njegovih največjih izvoznikih in uvoznikih ter kako se spreminja uvoz in izvoz skozi čas, ter zraven tudi kakšna je trgovinska bilanca. Vemo da je ZDA velesila in da so nekatere države odvisne od njihovega izvoza in uvoza, zraven pa se izkaže, da njihovo trgovanje obsega skorajda ves svet.
+Pri obravnavi trgovanja ZDA sem veliko izvedel o njenih največjih izvoznikih in uvoznikih ter kako se spreminja uvoz in izvoz skozi čas, ter zraven tudi kakšna je trgovinska bilanca. Zraven tega pa sem se tudi veliko naučil novega o delu s programom R/RStudio in reševanju problemov z njim.
