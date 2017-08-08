@@ -18,6 +18,7 @@ runtime: shiny
 # Uvoz vseh potrebnih knjižnic
 source("lib/libraries.r", encoding = "UTF-8")
 ```
+***
 
 # Izbira teme
 
@@ -36,6 +37,7 @@ Podatki so v obliki HTML in CSV.
 
 Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kakšna je trgovska bilanca in koliko ter kako se izvoz in uvoz spreminjata skozi čas v zadnjih letih pri največjih uvoznikih/izvoznikih. Podatke nameravam geografsko tudi prikazati in izvesti analizo razvrščanja na njih.
 
+***
 
 # Obdelava, uvoz in čiščenje podatkov
 
@@ -104,11 +106,12 @@ Za zgled si oglejmo začetka obeh glavnih tabel ("tabela_uvoz" in "tabela_izvoz"
 
 ```{r razpredelnice}
 kable(head(tabela_uvoz), caption = "Tabela uvoza ZDA v države sveta za obdobje 2006-2015" )
-
+```
+```{r razpredelnice}
 kable(head(tabela_izvoz), caption = "Tabela izvoza ZDA iz držav sveta za obdobje 2006-2015")
 ```
 
-
+***
 
 # Vizualizacija in analiza podatkov
 
@@ -119,40 +122,46 @@ source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 source("analiza/analiza.r", encoding = "UTF-8")
 ```
 
+V tem razdelku sem se najprej lotil risanje histogramov. Za to sem napisal dve funkciji, in sicer prva funkcija "narisi.graf" nariše histogram uvoza ZDA iz partnerskih držav za določeno leto, ki ga podamo v spremenljivki "leto", spremenljivka "stev" pa pove koliko držav hočemo imeti prikazanih (torej število največjih uvoznic v ZDA, vrstni red je določen glede na kategorijo vseh produktov, torej celotnega uvoza).
 
+Naslednja histograma prikazujeta 10 držav, iz katerih je ZDA največ uvažala v letih 2010 in 2015 narisana s pomočjo opisane funkcije.
 
-
-
-
-
-
-
-
-Slika \ref{fig:zemljevid} prikazuje povprečno velikost družine za vsako občino.
-
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-ggplot() + geom_polygon(data = left_join(zemljevid, povprecja, by = c("OB_UIME" = "obcina")),
-                        aes(x = long, y = lat, group = group, fill = povprecje)) +
-  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
-  guides(fill = guide_colorbar(title = "Povprečje"))
+```{r graf5, echo=FALSE, message=FALSE, fig.align='center'}
+print(graf5)
+```
+```{r graf10, echo=FALSE, message=FALSE, fig.align='center'}
+print(graf10)
 ```
 
+S pomočjo teh dveh grafov ugotovimo, da je Kitajska ves čas največja izvoznica v ZDA med državami sveta. Sledita ji Kanada in Mehika. Opazimo tudi, da se pri teh treh državah količina uvoza povečuje, ter da Mehika postaja vedno močnejša izvoznica v ZDA.
 
+Naslednja funkcija je "narisi.graf1", ki nariše histogram izvoza ZDA v partnerske države v letu, ki ga podamo v spremenljivki "leto". Spremenljivka "stev" pa pove koliko držav hočemo imeti prikazanih (torej število največjih izvoznic iz ZDA, vrstni red je določen glede na kategorijo vseh produktov, torej celotnega izvoza).
 
-Slika \ref{fig:graf} prikazuje povezavo med številom naselij in površino občine.
+Naslednja histograma prikazujeta 10 držav, v katere je ZDA največ izvažala v letih 2010 in 2015 narisana s pomočjo opisane funkcije.
 
-```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(inner_join(obcine, data.frame(obcina = names(skupine),
-                                     skupina = factor(skupine)), by = "obcina")
-, aes(x = povrsina, y = naselja, color = skupina, size = prebivalci/1000)) + geom_point() +
-  ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-  guides(color = guide_legend(title = "Skupina"),
-         size = guide_legend(title = "Prebivalci (* 1000)"))
+```{r graf5, echo=FALSE, message=FALSE, fig.align='center'}
+print(graf15)
+```
+```{r graf10, echo=FALSE, message=FALSE, fig.align='center'}
+print(graf20)
+```
+
+Spet ugotovimo, da je največja uvoznica iz ZDA Kitajska, nato Kanada, Mehika, itd. S pomočjo tabel lahko ugotovimo, da je od leta 2010 do 2014 izvoz v Kanado naraščal, nakar se je v letu 2015 močno zmanjšal. Izvoz na Kitajsko se je pa skozi leta povečeval, prav tako v Mehiko.
+
+Zanimivo je, da je v letu 2009 mogoče opaziti znatno zmanjšanje izvoza in uvoza, nakar se pa v letu 2010 spet začne povečevati.
+
+Nadaljeval sem z risanjem zemljevidov. Najprej sem uvozil zemljevid in spremenil imena za države, da so bila imena za države enaka, nato pa sem narisal zemljevid za izvoz v letu 2015 in nato še zemljevid za uvoz v letu 2015. 
+Zemljevid uvoza ZDA v letu 2015 sledi:
+
+```{r zem2, echo=FALSE, fig.align='center'}
+print(zem2 + geom_polygon(data = Uvoz %>%
+                 right_join(sv2, by = c("Partner" = "name_long")),
+               aes(x=long, y=lat, group = group, fill = Vsi_produkti),
+               color = "grey") + ggtitle("Celotni uvoz ZDA iz držav po svetu v letu 2015")+
+  scale_fill_gradient(low = "Ghostwhite", high = "brown3", guide = "colourbar")+ xlab("")+
+  ylab(""))
 ```
 
 ***
 
-```{r shiny, echo = FALSE}
-shinyAppDir("shiny", options=list(width="100%", height=600))
-```
+# Napredna analiza
