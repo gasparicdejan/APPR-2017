@@ -118,9 +118,6 @@ kable(head(tabela_izvoz), caption = "Tabela izvoza ZDA iz držav sveta za obdobj
 ```{r vizualizacija, echo=FALSE, message=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
-```{r analiza, echo=FALSE, message=FALSE}
-source("analiza/analiza.r", encoding = "UTF-8")
-```
 
 V tem razdelku sem se najprej lotil risanje histogramov. Za to sem napisal dve funkciji, in sicer prva funkcija "narisi.graf" nariše histogram uvoza ZDA iz partnerskih držav za določeno leto, ki ga podamo v spremenljivki "leto", spremenljivka "stev" pa pove koliko držav hočemo imeti prikazanih (torej število največjih uvoznic v ZDA, vrstni red je določen glede na kategorijo vseh produktov, torej celotnega uvoza).
 
@@ -146,22 +143,39 @@ print(graf15)
 print(graf20)
 ```
 
-Spet ugotovimo, da je največja uvoznica iz ZDA Kitajska, nato Kanada, Mehika, itd. S pomočjo tabel lahko ugotovimo, da je od leta 2010 do 2014 izvoz v Kanado naraščal, nakar se je v letu 2015 močno zmanjšal. Izvoz na Kitajsko se je pa skozi leta povečeval, prav tako v Mehiko.
+Ugotovimo, da je največja uvoznica iz ZDA Kanada, nato Mehika, veliko manj Kitajska in druge države. Zanimivo je, da je v letu 2009 mogoče opaziti znatno zmanjšanje izvoza in uvoza, nakar se pa v letu 2010 spet začne povečevati.
 
-Zanimivo je, da je v letu 2009 mogoče opaziti znatno zmanjšanje izvoza in uvoza, nakar se pa v letu 2010 spet začne povečevati.
-
-Nadaljeval sem z risanjem zemljevidov. Najprej sem uvozil zemljevid in spremenil imena za države, da so bila imena za države enaka, nato pa sem narisal zemljevid za izvoz v letu 2015 in nato še zemljevid za uvoz v letu 2015. 
+Nadaljeval sem z risanjem zemljevidov. Najprej sem uvozil zemljevid in spremenil imena držav, ki niso bila enaka na zemljevidu in v podatkih, nato pa sem narisal zemljevid za izvoz v letu 2015 in nato še zemljevid za uvoz v letu 2015. 
 Zemljevid uvoza ZDA v letu 2015 sledi:
 
 ```{r zem2, echo=FALSE, fig.align='center'}
 print(zem2 + geom_polygon(data = Uvoz %>%
-                 right_join(sv2, by = c("Partner" = "name_long")),
+                 right_join(sv1, by = c("Partner" = "name_long")),
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
                color = "grey") + ggtitle("Celotni uvoz ZDA iz držav po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "brown3", guide = "colourbar")+ xlab("")+
   ylab(""))
 ```
 
-***
+```{r analiza, echo=FALSE, message=FALSE}
+source("analiza/analiza.r", encoding = "UTF-8")
+```
 
-# Napredna analiza
+
+Naprej sem analiziral trgovinsko bilanco za države po svetu za katere imam podatke o uvozu in izvozu z ZDA (torej razlika med izvozom in uvozom ZDA). Naslednji zemljevid prikazuje trgovinsko bilanco za posamezno državo:
+
+```{r zem3, echo=FALSE, fig.align='center'}
+print(zem3 + geom_polygon(data = Bilanca %>%
+                 right_join(sv1, by = c("Partner" = "name_long")),
+               aes(x=long, y=lat, group = group, fill = Trgovinska_bilanca),
+               color = "grey") + 
+  ggtitle("Trgovinska bilanca med ZDA in državami po svetu v letu 2015")+
+  scale_fill_gradient(low = "Ghostwhite", high = "blue", guide = "colourbar")+ xlab("")+
+  ylab(""))
+```
+
+Ugotovil sem, da je največja razlika v trgovinski bilanci z Kitajsko, saj tja ZDA ne izvozi veliko v primerjavi s tem koliko uvozi. Videti je mogoče, da ima ZDA z večino držav sveta pozitivno trgovinsko bilanco.
+
+***
+# Zaključek
+Pri obravnavi trgovanja ZDA sem veliko izvedel o njegovih največjih izvoznikih in uvoznikih ter kako se spreminja uvoz in izvoz skozi čas, ter zraven tudi kakšna je trgovinska bilanca. Vemo da je ZDA velesila in da so nekatere države odvisne od njihovega izvoza in uvoza, zraven pa se izkaže, da njihovo trgovanje obsega skorajda ves svet.
