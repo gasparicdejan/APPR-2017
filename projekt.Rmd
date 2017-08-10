@@ -10,7 +10,7 @@ output:
 runtime: shiny
 ---
 
-```{r setup, echo=FALSE, results='hide', message=FALSE}
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 # Če želimo nastaviti pisave v PDF-ju, odkomentiramo
 # in sledimo navodilom v programu.
 #source("fontconfig.r", encoding = "UTF-8")
@@ -41,7 +41,7 @@ Namen analize je ugotoviti v katere države ZDA največ izvaža in uvaža, kakš
 
 # Obdelava, uvoz in čiščenje podatkov
 
-```{r uvoz, echo=FALSE, message=FALSE}
+```{r uvoz, echo=FALSE, message=FALSE, warning=FALSE}
 source("uvoz/uvoz.r", encoding = "UTF-8")
 ```
 
@@ -104,7 +104,7 @@ Sledilo je urejanje tabele "tabela_izvoz" s pomočjo funkcije "ciscenje".
 
 Za zgled si oglejmo začetka obeh glavnih tabel ("tabela_uvoz" in "tabela_izvoz"):
 
-```{r razpredelnice, echo=FALSE}
+```{r razpredelnice, echo=FALSE, message=FALSE, warning=FALSE}
 kable(tabela_uvoz[1:20,], caption = "Tabela uvoza ZDA v države sveta za obdobje 2006-2015" )
 
 kable(tabela_izvoz[1:20,], caption = "Tabela izvoza ZDA iz držav sveta za obdobje 2006-2015")
@@ -114,7 +114,7 @@ kable(tabela_izvoz[1:20,], caption = "Tabela izvoza ZDA iz držav sveta za obdob
 
 # Vizualizacija in analiza podatkov
 
-```{r vizualizacija, echo=FALSE, message=FALSE}
+```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 

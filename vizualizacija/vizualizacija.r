@@ -31,7 +31,8 @@ narisi.graf <- function(leto, stev){
     aes(x= Partnerji , y= Vsi_produkti)+
     geom_bar(stat = "identity", fill = "red")+
     ggtitle(paste(stev,"drzav, iz katerih je ZDA najvec uvazala v letu",leto))+
-    theme(plot.title = element_text(lineheight=.8, face="bold"))
+    theme(plot.title = element_text(lineheight=.8, face="bold"))+
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
   return(narisi)
 }
 
@@ -63,7 +64,8 @@ narisi.graf1 <- function(leto, stev){
     aes(x= Partnerji , y= Vsi_produkti)+
     geom_bar(stat = "identity", fill = "green")+
     ggtitle(paste(stev,"drzav, v katere je ZDA najvec izvazala v letu",leto))+
-    theme(plot.title = element_text(lineheight=.8, face="bold"))
+    theme(plot.title = element_text(lineheight=.8, face="bold"))+
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
   return(narisi)
 }
 
