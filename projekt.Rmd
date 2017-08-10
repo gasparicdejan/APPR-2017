@@ -25,6 +25,7 @@ source("lib/libraries.r", encoding = "UTF-8")
 Vsebina projekta pri predmetu APPR, ki sem ga izdeloval obsega trgovanje ZDA. V obsegu analize obravnavam izvoz in uvoz ZDA z drugimi državami sveta za obdobje 10let (2006-2015). Za države, ki so med največjimi uvoznicami/izvoznicami z ZDA, sta prikazana uvoz/izvoz nekaj glavnih kategorij produktov in uvoz/izvoz vseh produktov skupaj (celotnega uvoza/izvoza), ki jih uvaža/izvaža ZDA v te države. Podatki so v velikosti tisoč ameriških dolarjih (1000 USD).
 
 Podatki so pridobljeni na spletnih straneh:
+
 - http://en.wikipedia.org/wiki/List_of_the_largest_trading_partners_of_the_United_States;
 - http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2015/TradeFlow/Import/Indicator/MPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
 - http://wits.worldbank.org/CountryProfile/en/Country/USA/StartYear/2006/EndYear/2015/TradeFlow/Export/Indicator/XPRT-TRD-VL/Partner/BY-COUNTRY/Product/Total;
@@ -122,7 +123,7 @@ V tem razdelku sem se najprej lotil risanje histogramov. Za to sem napisal dve f
 
 Naslednja histograma prikazujeta 10 držav, iz katerih je ZDA največ uvažala v letih 2010 in 2015 narisana s pomočjo opisane funkcije.
 
-```{r histograma, echo=FALSE, message=FALSE, fig.align='center', warning=FALSE}
+```{r histograma1, echo=FALSE, message=FALSE, fig.align='center', warning=FALSE}
 print(graf5)
 
 print(graf10)
@@ -134,7 +135,7 @@ Naslednja funkcija je "narisi.graf1", ki nariše histogram izvoza ZDA v partners
 
 Naslednja histograma prikazujeta 10 držav, v katere je ZDA največ izvažala v letih 2010 in 2015 narisana s pomočjo opisane funkcije.
 
-```{r histograma, echo=FALSE, message=FALSE, fig.align='center', warning=FALSE}
+```{r histograma2, echo=FALSE, message=FALSE, fig.align='center', warning=FALSE}
 print(graf15)
 
 print(graf20)
@@ -151,14 +152,14 @@ print(zem1 + geom_polygon(data = Izvoz %>%
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
                color = "grey") + ggtitle("Celotni izvoz ZDA v države po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "green", guide = "colourbar") + xlab("")+
-  ylab(""))
+  ylab(""))+ guides(fill = guide_colorbar(title = "Vsi produkti"))
 
 print(zem2 + geom_polygon(data = Uvoz %>%
                  right_join(sv1, by = c("Partner" = "name_long")),
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
                color = "grey") + ggtitle("Celotni uvoz ZDA iz držav po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "brown3", guide = "colourbar")+ xlab("")+
-  ylab(""))
+  ylab(""))+ guides(fill = guide_colorbar(title = "Vsi produkti"))
 ```
 
 
@@ -171,7 +172,7 @@ print(zem3 + geom_polygon(data = Bilanca %>%
                color = "grey") + 
   ggtitle("Trgovinska bilanca med ZDA in državami po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "blue", guide = "colourbar")+ xlab("")+
-  ylab(""))
+  ylab(""))+ guides(fill = guide_colorbar(title = "Vsi produkti"))
 ```
 
 Ugotovil sem, da je največja razlika v trgovinski bilanci z Kitajsko, saj tja ZDA ne izvozi veliko v primerjavi s tem koliko uvozi. Videti je mogoče, da ima ZDA z večino držav sveta pozitivno trgovinsko bilanco. Vemo da velja ZDA za velesilo, zato je tudi njihova trgovina močno razširjena.

@@ -150,7 +150,7 @@ zem1 <- ggplot() +
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
                color = "grey") + ggtitle("Celotni izvoz ZDA v države po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "green", guide = "colourbar") + xlab("")+
-  ylab("")
+  ylab("")+ guides(fill = guide_colorbar(title = "Vsi produkti"))
 
 print(zem1)
 
@@ -171,7 +171,7 @@ zem2 <- ggplot() +
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
                color = "grey") + ggtitle("Celotni uvoz ZDA iz držav po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "brown3", guide = "colourbar")+ xlab("")+
-  ylab("")
+  ylab("")+ guides(fill = guide_colorbar(title = "Vsi produkti"))
 
 print(zem2)
 
@@ -202,6 +202,6 @@ zem3 <- ggplot() +
                color = "grey") + 
   ggtitle("Trgovinska bilanca med ZDA in državami po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "blue", guide = "colourbar")+ xlab("")+
-  ylab("")
+  ylab("")+ guides(fill = guide_colorbar(title = "Vsi produkti"))
 
 print(zem3)
