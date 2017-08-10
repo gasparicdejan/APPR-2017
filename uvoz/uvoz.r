@@ -36,11 +36,17 @@ uvozi.tabelo <- function(naslov, products){
 }
 
 tabela_uvoz_vseh_produktov <- uvozi.tabelo("podatki/import_all_product.csv", "Vsi_produkti")
+tabela_uvoz_vseh_produktov$Vsi_produkti <- tabela_uvoz_vseh_produktov$Vsi_produkti/1000000
 tabela_uvoz_zivali <- uvozi.tabelo("podatki/import_animal.csv", "Zivali")
+tabela_uvoz_zivali$Zivali <- tabela_uvoz_zivali$Zivali/1000000
 tabela_uvoz_zelenjave <- uvozi.tabelo("podatki/import_vegetable.csv", "Zelenjava")
+tabela_uvoz_zelenjave$Zelenjava <- tabela_uvoz_zelenjave$Zelenjava/1000000
 tabela_uvoz_goriva <- uvozi.tabelo("podatki/import_fuels.csv", "Gorivo")
+tabela_uvoz_goriva$Gorivo <- tabela_uvoz_goriva$Gorivo/1000000
 tabela_uvoz_plastike_in_gume <- uvozi.tabelo("podatki/import_plastic_or_rubber.csv", "Plastika_in_guma")
+tabela_uvoz_plastike_in_gume$Plastika_in_guma <- tabela_uvoz_plastike_in_gume$Plastika_in_guma/1000000
 tabela_uvoz_lesa <- uvozi.tabelo("podatki/import_wood.csv", "Les")
+tabela_uvoz_lesa$Les <- tabela_uvoz_lesa$Les/1000000
 
 
 
@@ -112,11 +118,17 @@ uvozi.tabelo1 <- function(naslov, products){
 }
 
 tabela_izvoz_vseh_produktov <- uvozi.tabelo1("podatki/export_all_product.csv", "Vsi_produkti")
+tabela_izvoz_vseh_produktov$Vsi_produkti <- tabela_izvoz_vseh_produktov$Vsi_produkti/1000000
 tabela_izvoz_zivali <- uvozi.tabelo1("podatki/export_animal.csv", "Zivali")
+tabela_izvoz_zivali$Zivali <- tabela_izvoz_zivali$Zivali/1000000
 tabela_izvoz_zelenjave <- uvozi.tabelo1("podatki/export_vegetable.csv", "Zelenjava")
+tabela_izvoz_zelenjave$Zelenjava <- tabela_izvoz_zelenjave$Zelenjava/1000000
 tabela_izvoz_goriva <- uvozi.tabelo1("podatki/export_fuels.csv", "Gorivo")
+tabela_izvoz_goriva$Gorivo <- tabela_izvoz_goriva$Gorivo/1000000
 tabela_izvoz_plastike_in_gume <- uvozi.tabelo1("podatki/export_plastic_or_rubber.csv", "Plastika_in_guma")
+tabela_izvoz_plastike_in_gume$Plastika_in_guma <- tabela_izvoz_plastike_in_gume$Plastika_in_guma/1000000
 tabela_izvoz_lesa <- uvozi.tabelo1("podatki/export_wood.csv", "Les")
+tabela_izvoz_lesa$Les <- tabela_izvoz_lesa$Les/1000000
 
 
 

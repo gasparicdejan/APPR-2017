@@ -104,11 +104,10 @@ Sledilo je urejanje tabele "tabela_izvoz" s pomočjo funkcije "ciscenje".
 
 Za zgled si oglejmo začetka obeh glavnih tabel ("tabela_uvoz" in "tabela_izvoz"):
 
-```{r razpredelnice}
-kable(head(tabela_uvoz), caption = "Tabela uvoza ZDA v države sveta za obdobje 2006-2015" )
-```
-```{r razpredelnice}
-kable(head(tabela_izvoz), caption = "Tabela izvoza ZDA iz držav sveta za obdobje 2006-2015")
+```{r razpredelnice, echo=FALSE}
+kable(tabela_uvoz[1:20,], caption = "Tabela uvoza ZDA v države sveta za obdobje 2006-2015" )
+
+kable(tabela_izvoz[1:20,], caption = "Tabela izvoza ZDA iz držav sveta za obdobje 2006-2015")
 ```
 
 ***
@@ -123,10 +122,9 @@ V tem razdelku sem se najprej lotil risanje histogramov. Za to sem napisal dve f
 
 Naslednja histograma prikazujeta 10 držav, iz katerih je ZDA največ uvažala v letih 2010 in 2015 narisana s pomočjo opisane funkcije.
 
-```{r graf5, echo=FALSE, message=FALSE, fig.align='center'}
+```{r histograma, echo=FALSE, message=FALSE, fig.align='center', warning=FALSE}
 print(graf5)
-```
-```{r graf10, echo=FALSE, message=FALSE, fig.align='center'}
+
 print(graf10)
 ```
 
@@ -136,10 +134,9 @@ Naslednja funkcija je "narisi.graf1", ki nariše histogram izvoza ZDA v partners
 
 Naslednja histograma prikazujeta 10 držav, v katere je ZDA največ izvažala v letih 2010 in 2015 narisana s pomočjo opisane funkcije.
 
-```{r graf5, echo=FALSE, message=FALSE, fig.align='center'}
+```{r histograma, echo=FALSE, message=FALSE, fig.align='center', warning=FALSE}
 print(graf15)
-```
-```{r graf10, echo=FALSE, message=FALSE, fig.align='center'}
+
 print(graf20)
 ```
 
@@ -148,16 +145,14 @@ Ugotovimo, da ZDA največ izvaža v Kanado, nato Mehiko, veliko manj Kitajska in
 
 Nadaljeval sem z risanjem zemljevidov. Najprej sem uvozil zemljevid in spremenil imena držav, ki niso bila enaka na zemljevidu in v podatkih, nato pa sem narisal zemljevid za izvoz v letu 2015 in nato še zemljevid za uvoz v letu 2015. Predstavljena zemljevida sledita:
 
-```{r zem1, echo=FALSE, fig.align='center'}
+```{r zemljevida, echo=FALSE, fig.align='center', message=FALSE, warning=FALSE}
 print(zem1 + geom_polygon(data = Izvoz %>%
                  right_join(sv1, by = c("Partner" = "name_long")),
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
                color = "grey") + ggtitle("Celotni izvoz ZDA v države po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "green", guide = "colourbar") + xlab("")+
   ylab(""))
-```
 
-```{r zem2, echo=FALSE, fig.align='center'}
 print(zem2 + geom_polygon(data = Uvoz %>%
                  right_join(sv1, by = c("Partner" = "name_long")),
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
@@ -166,14 +161,10 @@ print(zem2 + geom_polygon(data = Uvoz %>%
   ylab(""))
 ```
 
-```{r analiza, echo=FALSE, message=FALSE}
-source("analiza/analiza.r", encoding = "UTF-8")
-```
-
 
 Naprej sem analiziral trgovinsko bilanco za države po svetu za katere imam podatke o uvozu in izvozu z ZDA (torej razlika med izvozom in uvozom ZDA). Naslednji zemljevid prikazuje trgovinsko bilanco za posamezno državo:
 
-```{r zem3, echo=FALSE, fig.align='center'}
+```{r zemljevid, echo=FALSE, fig.align='center', message=FALSE, warning=FALSE}
 print(zem3 + geom_polygon(data = Bilanca %>%
                  right_join(sv1, by = c("Partner" = "name_long")),
                aes(x=long, y=lat, group = group, fill = Trgovinska_bilanca),
