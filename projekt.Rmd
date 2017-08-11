@@ -152,14 +152,14 @@ print(zem1 + geom_polygon(data = Izvoz %>%
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
                color = "grey") + ggtitle("Celotni izvoz ZDA v države po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "green", guide = "colourbar") + xlab("")+
-  ylab(""))+ guides(fill = guide_colorbar(title = "Vsi produkti"))
+  ylab("")+ guides(fill = guide_colorbar(title = "Vsi produkti")))
 
 print(zem2 + geom_polygon(data = Uvoz %>%
                  right_join(sv1, by = c("Partner" = "name_long")),
                aes(x=long, y=lat, group = group, fill = Vsi_produkti),
                color = "grey") + ggtitle("Celotni uvoz ZDA iz držav po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "brown3", guide = "colourbar")+ xlab("")+
-  ylab(""))+ guides(fill = guide_colorbar(title = "Vsi produkti"))
+  ylab("")+ guides(fill = guide_colorbar(title = "Vsi produkti")))
 ```
 
 
@@ -172,7 +172,7 @@ print(zem3 + geom_polygon(data = Bilanca %>%
                color = "grey") + 
   ggtitle("Trgovinska bilanca med ZDA in državami po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "blue", guide = "colourbar")+ xlab("")+
-  ylab(""))+ guides(fill = guide_colorbar(title = "Vsi produkti"))
+  ylab("")+ guides(fill = guide_colorbar(title = "Trgovinska_bilanca")))
 ```
 
 Ugotovil sem, da je največja razlika v trgovinski bilanci z Kitajsko, saj tja ZDA ne izvozi veliko v primerjavi s tem koliko uvozi. Videti je mogoče, da ima ZDA z večino držav sveta pozitivno trgovinsko bilanco. Vemo da velja ZDA za velesilo, zato je tudi njihova trgovina močno razširjena.

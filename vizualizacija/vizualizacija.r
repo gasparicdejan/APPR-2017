@@ -202,6 +202,6 @@ zem3 <- ggplot() +
                color = "grey") + 
   ggtitle("Trgovinska bilanca med ZDA in državami po svetu v letu 2015")+
   scale_fill_gradient(low = "Ghostwhite", high = "blue", guide = "colourbar")+ xlab("")+
-  ylab("")+ guides(fill = guide_colorbar(title = "Vsi produkti"))
+  ylab("")+ guides(fill = guide_colorbar(title = "Trgovinska_bilanca"))
 
 print(zem3)
